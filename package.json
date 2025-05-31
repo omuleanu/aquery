@@ -1,0 +1,25 @@
+{
+  "name": "aquery",
+  "version": "1.0.0",
+  "description": "aquery, jQuery subset using modern js",
+  "keywords": [
+    "jquery",
+    "subset"
+  ],
+  "license": "MIT",
+  "author": "Valentin Plamadeala",
+  "type": "module",
+  "main": "aquery.js",
+  "files": [
+    "dist",
+    "README.md"
+  ],
+  "scripts": {
+    "build": "vite build"
+  },
+  "devDependencies": {
+    "rollup-plugin-terser": "^7.0.2",
+    "vite": "^6.0.7",
+    "vite-plugin-static-copy": "^3.0.0"
+  }
+}
