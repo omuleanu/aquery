@@ -1,41 +1,26 @@
 import { defineConfig } from 'vite';
-import { resolve } from 'path';
-import { terser } from 'rollup-plugin-terser';
 import { viteStaticCopy } from 'vite-plugin-static-copy';
 
 export default defineConfig({
     plugins: [
         viteStaticCopy({
             targets: [
-                {
-                    src: 'src/aquery.js',
-                    dest: '.', // Copy to dist/
-                    rename: 'aquery.js', // Non-versioned file
-                },
+                { src: 'src/aquery.js', dest: '.' }, // Copy to dist/
             ],
         }),
     ],
     build: {
-        minify: false, // Disable Vite's default minification (handled by Terser)
+        minify: 'esbuild', // Use Vite's default minifier
         sourcemap: true,
         rollupOptions: {
             input: {
-                aquery: resolve(__dirname, 'src/aquery.js'),
+                aquery: 'src/aquery.js',
             },
             output: [
                 {
-                    format: 'iife', // IIFE for global usage like jQuery
-                    name: 'aquery', // Global variable name (e.g., window.aquery)
-                    entryFileNames: 'aquery.min.js', // Non-versioned minified file
+                    name: 'aquery', // Global variable name (window.aquery)
+                    entryFileNames: 'aquery.min.js',
                     dir: 'dist',
-                    exports: 'named',                    
-                    plugins: [
-                        terser({
-                            output: {
-                                comments: false,
-                            },
-                        }),
-                    ],
                 },
             ],
         },
