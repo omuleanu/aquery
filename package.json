@@ -1,5 +1,5 @@
 {
-  "name": "aquery",
+  "name": "@omuleanu/aquery",
   "version": "1.0.0",
   "description": "aquery, jQuery subset using modern js",
   "keywords": [
