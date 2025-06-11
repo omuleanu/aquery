@@ -65,7 +65,7 @@
         if (err) {
             adf.errorThrown = err;
             adf.statusText = err.message;
-            adf.status = err?.response.status;
+            adf.status = err?.response?.status;
         }
     }
 
@@ -188,7 +188,7 @@
             options = opt2;
         }
 
-        let { url, data, traditional, error, dataType, contentType } = options;
+        let { url, data, traditional, error, dataType, contentType, xhrFields } = options;
 
         let method = options.method || options.type || 'get';
 
@@ -200,7 +200,7 @@
 
         if (method == 'get') traditional = true;
 
-        function serializeData(data) {
+        function serializeData(data) {            
             if (!data) return '';
             if (!traditional && contentType == 'application/json') { return JSON.stringify(data); }
 
@@ -212,7 +212,8 @@
         }
 
         const fetchOptions = {
-            method: method, headers: { "X-Requested-With": "XMLHttpRequest" }
+            method: method,
+            headers: { "X-Requested-With": "XMLHttpRequest" }
         };
 
         if (method === 'get') {
@@ -249,10 +250,12 @@
                         throw err;
                     });
                 }
-
+                
                 xhr.statusText = response.statusText;
-
-                if (contentType && contentType.includes('application/json')) {
+                if (xhrFields?.responseType == 'blob') {
+                    return response.blob();
+                }
+                else if (contentType?.includes('application/json')) {
                     return response.json();
                 } else {
                     return response.text();
