@@ -7,7 +7,7 @@ A lightweight, JavaScript library designed as a drop-in replacement for jQuery, 
 Include the library directly in your HTML via a CDN or local file:
 
 ```html
-<script src="path/to/aquery-1.0.0.min.js"></script>
+<script src="path/to/aquery.js"></script>
 ```
 
 ## Usage
